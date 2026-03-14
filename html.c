@@ -63,12 +63,19 @@ void html_encode(FILE *fd, char *s)
 // Returns true if the last character printed was a slash
 bool url_encode(FILE *fd, char *s)
 {
-  // Removes / from the reserved list:
-  static const char *reserved = "!#$&'()*+,:;=?@[]";
+  // reserved:
+  //  #? important delimiters
+  //  [] invalid outside use in the URL authority component
+  //  &' may need escaping in HTML
+  //  $+,:;=@ encoded by encodeURIComponent in JavaScript
+  //  !()* not encoded by encodeURIComponent
+  // allowed: -./_~ and [0-9] and [A-Z] and [a-z]
+  // disallowed: "%<>\^`{|} and [0x00-0x20] and [0x7F-0xFF]
+  static const char *allowable = "-./_~";
   bool slash = false;
 
   for(;*s;s++) {
-    fprintf(fd, (isprint((u_int)*s) && (strchr(reserved, *s) == NULL))? "%c":"%%%02X", *s);
+    fprintf(fd, (isalnum((unsigned int)*s) || (strchr(allowable, *s) != NULL))? "%c":"%%%02X", *s);
     slash = (*s == '/');
   }
   return slash;
