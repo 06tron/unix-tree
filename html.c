@@ -71,11 +71,23 @@ bool url_encode(FILE *fd, char *s)
   //  !()* not encoded by encodeURIComponent
   // allowed: -./_~ and [0-9] and [A-Z] and [a-z]
   // disallowed: "%<>\^`{|} and [0x00-0x20] and [0x7F-0xFF]
-  static const char *allowable = "-./_~";
   bool slash = false;
-
-  for(;*s;s++) {
-    fprintf(fd, (isalnum((unsigned int)*s) || (strchr(allowable, *s) != NULL))? "%c":"%%%02X", *s);
+  for (; *s; ++s) {
+    if ((*s >= 'a' && *s <= 'z')
+    	|| (*s >= 'A' && *s <= 'Z')
+    	|| (*s >= '0' && *s <= '9')
+    	|| *s == '/'
+    	|| *s == '-'
+    	|| *s == '_'
+    	|| *s == '.'
+    	|| *s == '~')
+    {
+    	fprintf(fd, "%c", *s);
+    }
+    else
+    {
+    	fprintf(fd, "%%%02X", (unsigned char) *s);
+    }
     slash = (*s == '/');
   }
   return slash;
