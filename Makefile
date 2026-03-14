@@ -131,3 +131,6 @@ distclean:
 
 dist:	distclean
 	tar zcf ../tree-$(VERSION).tgz -C .. `cat .tarball`
+
+test:
+	cd test-filename && tree -H '' > index.html
