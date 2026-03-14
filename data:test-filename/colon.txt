@@ -1,0 +1,4 @@
+filename [data:test-filename/colon.txt] works
+when encoded as [data%3Atest-filename/colon.txt]
+otherwise if [data:] is the first part of the relative URL,
+then it will be parsed using the data URL scheme instead

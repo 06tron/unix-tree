@@ -1,4 +1,4 @@
-test-filename/index.html
+test-filenames.html
 
 # Ignore the things we would normally "clean":
 *.o
