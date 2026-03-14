@@ -16,8 +16,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-PREFIX=/usr/local
-
+#PREFIX=/usr/local
+PREFIX=/opt/homebrew
 
 CC ?= gcc
 INSTALL ?= install
@@ -34,12 +34,12 @@ OBJS=color.o file.o filter.o hash.o html.o info.o json.o list.o tree.o unix.o \
 # Uncomment options below for your particular OS:
 
 # Linux defaults:
-LDFLAGS?=-s
+#LDFLAGS?=-s
 #CFLAGS?=-ggdb
-CFLAGS?=-O3
-CFLAGS+=-std=c11 -Wpedantic -Wall -Wextra -Wstrict-prototypes -Wshadow -Wconversion
+#CFLAGS?=-O3
+#CFLAGS+=-std=c11 -Wpedantic -Wall -Wextra -Wstrict-prototypes -Wshadow -Wconversion
 # _LARGEFILE64_SOURCE may be considered obsolete
-CPPFLAGS+=-DLARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
+#CPPFLAGS+=-DLARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 
 # Uncomment for FreeBSD:
 #CC=cc
@@ -68,11 +68,11 @@ CPPFLAGS+=-DLARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 
 # Uncomment for MacOS:
 # It is not allowed to install to /usr/bin on MacOS any longer (SIP):
-#CC = cc
-#CFLAGS?=-O2
-#CFLAGS+=-Wall -fomit-frame-pointer -no-cpp-precomp
-#LDFLAGS+=
-#MANDIR=${PREFIX}/share/man
+CC = cc
+CFLAGS?=-O2
+CFLAGS+=-Wall -fomit-frame-pointer -no-cpp-precomp
+LDFLAGS+=
+MANDIR=${PREFIX}/share/man
 
 # Uncomment for HP/UX:
 #prefix=/opt
