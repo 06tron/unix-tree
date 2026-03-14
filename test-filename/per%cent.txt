@@ -1,1 +1,2 @@
-filename "per%cent.txt" works when encoded as "per%25cent.txt"
+filename [per%cent.txt] works when encoded as [per%25cent.txt]
+otherwise [%ce] is parsed as a percent-encoded byte

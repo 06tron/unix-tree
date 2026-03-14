@@ -1,0 +1,2 @@
+filename [back\slash.txt] works when encoded as [back%5Cslash.txt]
+otherwise [\] might be converted to [/] 
