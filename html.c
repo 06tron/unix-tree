@@ -63,12 +63,27 @@ void html_encode(FILE *fd, char *s)
 // Returns true if the last character printed was a slash
 bool url_encode(FILE *fd, char *s)
 {
-  // Removes / from the reserved list:
-  static const char *reserved = "!#$&'()*+,:;=?@[]";
   bool slash = false;
 
   for(;*s;s++) {
-    fprintf(fd, (isprint((u_int)*s) && (strchr(reserved, *s) == NULL))? "%c":"%%%02X", *s);
+	// encodes all characters except:
+	// - "unreserved" from RFC 3986
+	// - U+2F (/) forward slash
+    if ((*s >= 'a' && *s <= 'z')
+    	|| (*s >= 'A' && *s <= 'Z')
+    	|| (*s >= '0' && *s <= '9')
+    	|| *s == '/'
+    	|| *s == '-'
+    	|| *s == '_'
+    	|| *s == '.'
+    	|| *s == '~')
+    {
+    	fprintf(fd, "%c", *s);
+    }
+    else
+    {
+    	fprintf(fd, "%%%02X", (unsigned char) *s);
+    }
     slash = (*s == '/');
   }
   return slash;
