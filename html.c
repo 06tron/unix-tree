@@ -63,16 +63,12 @@ void html_encode(FILE *fd, char *s)
 // Returns true if the last character printed was a slash
 bool url_encode(FILE *fd, char *s)
 {
-  // reserved:
-  //  #? important delimiters
-  //  [] invalid outside use in the URL authority component
-  //  &' may need escaping in HTML
-  //  $+,:;=@ encoded by encodeURIComponent in JavaScript
-  //  !()* not encoded by encodeURIComponent
-  // allowed: -./_~ and [0-9] and [A-Z] and [a-z]
-  // disallowed: "%<>\^`{|} and [0x00-0x20] and [0x7F-0xFF]
   bool slash = false;
-  for (; *s; ++s) {
+
+  for(;*s;s++) {
+	// encodes all characters except:
+	// - "unreserved" from RFC 3986
+	// - U+2F (/) forward slash
     if ((*s >= 'a' && *s <= 'z')
     	|| (*s >= 'A' && *s <= 'Z')
     	|| (*s >= '0' && *s <= '9')
