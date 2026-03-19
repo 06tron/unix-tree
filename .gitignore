@@ -4,3 +4,4 @@ test-filenames.html
 *.o
 tree
 *~
+/work
