@@ -121,6 +121,7 @@ void html_intro(void)
 	" <style type=\"text/css\">\n"
 	"  BODY { font-family : monospace, sans-serif;  color: black;}\n"
 	"  P { font-family : monospace, sans-serif; color: black; margin:0px; padding: 0px;}\n"
+	"  PRE { font-size : 1rem;}\n"
 	"  A:visited { text-decoration : none; margin : 0px; padding : 0px;}\n"
 	"  A:link    { text-decoration : none; margin : 0px; padding : 0px;}\n"
 	"  A:hover   { text-decoration: underline; background-color : yellow; margin : 0px; padding : 0px;}\n"
@@ -258,7 +259,7 @@ void html_report(struct totals tot)
 {
   char buf[256];
 
-  fprintf(outfile,"\n\n");
+  fprintf(outfile,"\n");
 
   if (flag.du) {
     psize(buf, tot.size);
@@ -268,6 +269,4 @@ void html_report(struct totals tot)
     fprintf(outfile,"%ld director%s\n",tot.dirs,(tot.dirs==1? "y":"ies"));
   else
     fprintf(outfile,"%ld director%s, %ld file%s\n",tot.dirs,(tot.dirs==1? "y":"ies"),tot.files,(tot.files==1? "":"s"));
-
-  fprintf(outfile, "\n");
 }
