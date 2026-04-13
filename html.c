@@ -2,6 +2,7 @@
 
 URL encoding modified by Matthew Richardson
 (https://orcid.org/0009-0001-0977-2029) on March 14th, 2026.
+- Switched to <pre> from regular text with <br> on April 12th, 2026.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -120,6 +121,7 @@ void html_intro(void)
 	" <style type=\"text/css\">\n"
 	"  BODY { font-family : monospace, sans-serif;  color: black;}\n"
 	"  P { font-family : monospace, sans-serif; color: black; margin:0px; padding: 0px;}\n"
+	"  PRE { font-size : 1rem;}\n"
 	"  A:visited { text-decoration : none; margin : 0px; padding : 0px;}\n"
 	"  A:link    { text-decoration : none; margin : 0px; padding : 0px;}\n"
 	"  A:hover   { text-decoration: underline; background-color : yellow; margin : 0px; padding : 0px;}\n"
@@ -138,16 +140,18 @@ void html_intro(void)
 	"<body>\n"
 	"\t<h1>%s</h1><p>\n", title, title);
   }
+  fprintf(outfile, "<pre>");
 }
 
 void html_outtro(void)
 {
+  fprintf(outfile, "</pre>\n");
   if (Houtro) fcat(Houtro);
   else {
-    fprintf(outfile,"\t<hr>\n");
-    fprintf(outfile,"\t<p class=\"VERSION\">\n");
+    fprintf(outfile,"<hr>\n");
+    fprintf(outfile,"<p class=\"VERSION\">\n");
     fprintf(outfile,hversion,linedraw->copy, linedraw->copy, linedraw->copy, linedraw->copy);
-    fprintf(outfile,"\t</p>\n");
+    fprintf(outfile,"\n</p>\n");
     fprintf(outfile,"</body>\n");
     fprintf(outfile,"</html>\n");
   }
@@ -241,7 +245,7 @@ void html_newline(struct _info *file, int level, int postdir, int needcomma)
 {
   UNUSED(file);UNUSED(level);UNUSED(postdir);UNUSED(needcomma);
 
-  fprintf(outfile, "<br>\n");
+  fprintf(outfile, "\n");
 }
 
 void html_close(struct _info *file, int level, int needcomma)
@@ -255,7 +259,7 @@ void html_report(struct totals tot)
 {
   char buf[256];
 
-  fprintf(outfile,"<br><br><p>\n\n");
+  fprintf(outfile,"\n");
 
   if (flag.du) {
     psize(buf, tot.size);
@@ -265,6 +269,4 @@ void html_report(struct totals tot)
     fprintf(outfile,"%ld director%s\n",tot.dirs,(tot.dirs==1? "y":"ies"));
   else
     fprintf(outfile,"%ld director%s, %ld file%s\n",tot.dirs,(tot.dirs==1? "y":"ies"),tot.files,(tot.files==1? "":"s"));
-
-  fprintf(outfile, "\n</p>\n");
 }

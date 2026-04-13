@@ -2,6 +2,7 @@
 
 Value of 'hversion' modified by Matthew Richardson
 (https://orcid.org/0009-0001-0977-2029) on March 20th, 2026.
+- Removed non-breaking spaces from HTML output on April 12th, 2026.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -307,7 +308,6 @@ int main(int argc, char **argv)
 	  }
 	  /* Allows a / if that is the only character as the 'host': */
 //	  if (k && host[k] == '/') host[k] = '\0';
-	  sp = "&nbsp;";
 	  break;
 	case 'T':
 	  if (argv[n] == NULL) {
@@ -1353,16 +1353,13 @@ int patmatch(const char *buf, const char *pat, bool isdir)
 void indent(int maxlevel)
 {
   static const char *spaces[3]     = {"   ", "  ", " "};
-  static const char *htmlspaces[3] = {"&nbsp;&nbsp;&nbsp;", "&nbsp;&nbsp;", "&nbsp;"};
-  char *space = (flag.H? "&nbsp;" : " ");
   int i, clvl = flag.compress_indent;
 
-  if (flag.H) fprintf(outfile,"\t");
   for(i=1; (i <= maxlevel) && dirs[i]; i++) {
     fprintf(outfile, "%s",
-            dirs[i+1] ? (dirs[i]==1 ? linedraw->vert[clvl]      : (flag.H? htmlspaces[clvl] : spaces[clvl]))
+            dirs[i+1] ? (dirs[i]==1 ? linedraw->vert[clvl]      : spaces[clvl])
                       : (dirs[i]==1 ? linedraw->vert_left[clvl] : linedraw->corner[clvl]));
-    if (flag.remove_space != true) fprintf(outfile, "%s", space);
+    if (flag.remove_space != true) fprintf(outfile, "%s", sp);
   }
 }
 
