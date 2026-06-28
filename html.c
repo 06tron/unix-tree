@@ -145,14 +145,14 @@ void html_intro(void)
 
 void html_outtro(void)
 {
-  fprintf(outfile, "</pre>\n");
+  fprintf(outfile, "</pre>");
   if (Houtro) fcat(Houtro);
   else {
-    fprintf(outfile,"<hr>\n");
-    fprintf(outfile,"<p class=\"VERSION\">\n");
+    fprintf(outfile,"<hr/>");
+    fprintf(outfile,"<p class=\"VERSION\">");
     fprintf(outfile,hversion,linedraw->copy, linedraw->copy, linedraw->copy, linedraw->copy);
-    fprintf(outfile,"\n</p>\n");
-    fprintf(outfile,"</body>\n");
+    fprintf(outfile,"</p>");
+    fprintf(outfile,"</body>");
     fprintf(outfile,"</html>\n");
   }
 }
@@ -252,7 +252,7 @@ void html_close(struct _info *file, int level, int needcomma)
 {
   UNUSED(level);UNUSED(needcomma);
 
-  fprintf(outfile, "</%s><br>\n", file->tag);
+  fprintf(outfile, "</%s><br/>\n", file->tag);
 }
 
 void html_report(struct totals tot)
