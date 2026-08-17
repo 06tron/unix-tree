@@ -68,9 +68,9 @@ bool url_encode(FILE *fd, char *s)
   bool slash = false;
 
   for(;*s;s++) {
-	// encodes all characters except:
-	// - "unreserved" from RFC 3986
-	// - U+2F (/) forward slash
+    // encodes all characters except:
+    // - "unreserved" from RFC 3986
+    // - U+2F (/) forward slash
     if ((*s >= 'a' && *s <= 'z')
     	|| (*s >= 'A' && *s <= 'Z')
     	|| (*s >= '0' && *s <= '9')
@@ -110,13 +110,13 @@ void html_intro(void)
   else {
     fprintf(outfile,
 	"<!DOCTYPE html>\n"
-	"<html>\n"
+	"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
 	"<head>\n"
-	" <meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\">\n"
-	" <meta name=\"Author\" content=\"Made by 'tree'\">\n"
+	" <meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\"/>\n"
+	" <meta name=\"Author\" content=\"Made by 'tree'\"/>\n"
 	" <meta name=\"GENERATOR\" content=\"", charset ? charset : "iso-8859-1");
     print_version(false);
-    fprintf(outfile, "\">\n"
+    fprintf(outfile, "\"/>\n"
 	" <title>%s</title>\n"
 	" <style type=\"text/css\">\n"
 	"  BODY { font-family : monospace, sans-serif;  color: black;}\n"
